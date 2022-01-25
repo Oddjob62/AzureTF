@@ -17,7 +17,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@V1
         with:
-          terrafrom_version 1.0.10
+          terraform_version 1.0.10
 
 
       # - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."

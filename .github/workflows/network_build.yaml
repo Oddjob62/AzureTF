@@ -1,4 +1,4 @@
-name: "Build Foundation"
+name: "Build Network"
 
 on:
 #  push:
@@ -19,4 +19,4 @@ jobs:
       CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
 
     with:
-      working_directory: Foundation
+      working_directory: Network

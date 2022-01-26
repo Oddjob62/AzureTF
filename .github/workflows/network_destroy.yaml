@@ -1,9 +1,6 @@
-name: "Build Foundation"
+name: "Destroy Network"
 
 on:
-#  push:
-#    branches:
-#     - main
   workflow_dispatch:
 
 jobs:
@@ -19,4 +16,5 @@ jobs:
       CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
 
     with:
-      working_directory: Foundation
+      working_directory: Network
+      destroy: true

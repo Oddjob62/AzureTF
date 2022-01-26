@@ -1,6 +1,6 @@
 name: "Terraform"
 on: 
-  worflow_call:
+  workflow_call:
     inputs:
       working_directory:
         type: string

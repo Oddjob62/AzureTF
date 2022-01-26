@@ -91,7 +91,7 @@ jobs:
           terraform apply -auto-approve -no-color
 
       - name: Terraform Destroy
-        id: apply
+        id: destroy
         if: ${{inputs.destroy == true}}
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}

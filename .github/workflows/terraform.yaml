@@ -6,7 +6,7 @@ on:
         type: string
         description: "working direcotry"
         required: true
-        deafult: '.'
+        default: '.'
       destroy:
         type: boolean
         description: "If true then all resources are destroyed"

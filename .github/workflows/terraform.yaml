@@ -12,6 +12,15 @@ on:
         description: "If true then all resources are destroyed"
         required: false
         default: ${{ false }}
+    secrets:
+        ARM_CLIENT_ID:
+        ARM_CLIENT_SECRET:
+        ARM_TENANT_ID:
+        ARM_SUBSCRIPTION_ID:
+        RESOURCE_GROUP:
+        STORAGE_ACCOUNT:
+        CONTAINER_NAME:
+
 
     
 env:

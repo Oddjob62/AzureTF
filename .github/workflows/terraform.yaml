@@ -1,7 +1,19 @@
 name: "Terraform"
 on: 
-  workflow_dispatch:
-    branches: [ main ]
+  worflow_call:
+    inputs:
+      working_directory:
+        type: string
+        description: "working direcotry"
+        required: true
+        deafult '.'
+      destroy:
+        type: boolean
+        description: "If true then all resources are destroyed"
+        required: false
+        default ${{ false }}
+
+    
 env:
   TF_LOG: INFO
 jobs:
@@ -11,7 +23,6 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./main
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -37,20 +48,20 @@ jobs:
 
       - name: Terraform Plan
         id: plan
+        if: ${{inputs.destroy == false}}
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-#        if: github.event_name == 'pull_request'
         run: terraform plan -no-color
 
       - name: Terraform Apply
         id: apply
+        if: ${{inputs.destroy == false}}
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-#        if: github.event_name == 'pull_request'
         run: terraform apply -auto-approve -no-color

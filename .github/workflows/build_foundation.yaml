@@ -1,0 +1,10 @@
+name: "Build Foundation"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    uses: Oddjob62/AzureTF/.github/workflows/terraform.yaml@main
+    with:
+      working_directory: Foundation

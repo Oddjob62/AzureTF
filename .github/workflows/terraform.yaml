@@ -14,14 +14,19 @@ on:
         default: ${{ false }}
     secrets:
         ARM_CLIENT_ID:
+          description: "secret"
         ARM_CLIENT_SECRET:
+          description: "secret"
         ARM_TENANT_ID:
+          description: "secret"
         ARM_SUBSCRIPTION_ID:
+          description: "secret"
         RESOURCE_GROUP:
+          description: "secret"
         STORAGE_ACCOUNT:
+          description: "secret"
         CONTAINER_NAME:
-
-
+          description: "secret"
     
 env:
   TF_LOG: INFO

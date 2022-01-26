@@ -13,7 +13,7 @@ provider "azurerm" {
 }
 
 locals {
-  config_content = file("./config.yaml")
+  config_content = file("../Configs/config.yaml")
   config         = yamldecode(local.config_content)
   default_tags   = {}
 }

@@ -4,7 +4,7 @@ on:
     inputs:
       working_directory:
         type: string
-        description: "working direcotry"
+        description: "working directory"
         required: true
         default: '.'
       destroy:
@@ -32,6 +32,11 @@ jobs:
         with:
           terraform_version: 1.1.0
 
+      - name: Versions
+        run: |
+          echo "::notice title=Terraform::working_directory = ${{ inputs.working_directory }}"
+          terraform version
+
       - name: Terraform Init
         id: init
         env:
@@ -43,6 +48,7 @@ jobs:
           STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
           CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
         run: | 
+          cd ${{ inputs.working_directory }}
           terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP" -backend-config="key=myfrist.tfstate"
           ls -l
 
@@ -54,7 +60,9 @@ jobs:
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-        run: terraform plan -no-color
+        run: |
+          cd ${{ inputs.working_directory }}
+          terraform plan -no-color
 
       - name: Terraform Apply
         id: apply
@@ -64,4 +72,6 @@ jobs:
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-        run: terraform apply -auto-approve -no-color
+        run: |
+          cd ${{ inputs.working_directory }}
+          terraform apply -auto-approve -no-color

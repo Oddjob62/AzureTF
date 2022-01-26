@@ -89,3 +89,15 @@ jobs:
         run: |
           cd ${{ inputs.working_directory }}
           terraform apply -auto-approve -no-color
+
+      - name: Terraform Destroy
+        id: apply
+        if: ${{inputs.destroy == true}}
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+        run: |
+          cd ${{ inputs.working_directory }}
+          terraform destroy -auto-approve -no-color

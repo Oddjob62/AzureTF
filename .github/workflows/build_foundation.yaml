@@ -1,6 +1,9 @@
 name: "Build Foundation"
 
 on:
+  push:
+    branches:
+     - main
   workflow_dispatch:
 
 jobs:

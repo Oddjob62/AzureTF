@@ -16,5 +16,6 @@ jobs:
       CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
 
     with:
-      working_directory: Foundation
+      working_directory: foundation
+      config: foundation
       destroy: true

@@ -7,6 +7,10 @@ on:
         description: "working directory"
         required: true
         default: '.'
+      config:
+        type: string
+        description: "Name of config file"
+        required: true
       destroy:
         type: boolean
         description: "If true then all resources are destroyed"
@@ -30,6 +34,7 @@ on:
     
 env:
   TF_LOG: INFO
+  TF_VAR_config_name : "${{ inputs.config }}"
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -49,6 +54,8 @@ jobs:
       - name: Versions
         run: |
           echo "::notice title=Terraform::working_directory = ${{ inputs.working_directory }}"
+          echo "::notice title=Terraform::config = ${{ inputs.config }}"
+          echo "::notice title=Terraform::instance = ${{ inputs.instance }}"
           terraform version
 
       - name: Terraform Init
@@ -63,8 +70,17 @@ jobs:
           CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
         run: | 
           cd ${{ inputs.working_directory }}
-          terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP" -backend-config="key=${{ inputs.working_directory }}.tfstate"
-          ls -l
+          terraform init \
+            -backend-config="storage_account_name=$STORAGE_ACCOUNT" \
+            -backend-config="container_name=$CONTAINER_NAME" \
+            -backend-config="resource_group_name=$RESOURCE_GROUP" \
+            -backend-config="key=${{ inputs.config }}_${{ inputs.working_directory }}.tfstate"
+
+      - name: Terraform Validate
+        id: validate
+        run: |
+          cd ${{ inputs.working_directory }}
+          terraform validate
 
       - name: Terraform Plan
         id: plan

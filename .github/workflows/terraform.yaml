@@ -39,6 +39,15 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
 
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
+      STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
+      CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
+
     defaults:
       run:
         shell: bash
@@ -60,14 +69,6 @@ jobs:
 
       - name: Terraform Init
         id: init
-        env:
-          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
-          STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
-          CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
         run: | 
           cd ${{ inputs.working_directory }}
           terraform init \
@@ -85,11 +86,6 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: ${{inputs.destroy == false}}
-        env:
-          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
         run: |
           cd ${{ inputs.working_directory }}
           terraform plan -no-color
@@ -97,11 +93,6 @@ jobs:
       - name: Terraform Apply
         id: apply
         if: ${{inputs.destroy == false}}
-        env:
-          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
         run: |
           cd ${{ inputs.working_directory }}
           terraform apply -auto-approve -no-color
@@ -109,11 +100,6 @@ jobs:
       - name: Terraform Destroy
         id: destroy
         if: ${{inputs.destroy == true}}
-        env:
-          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
         run: |
           cd ${{ inputs.working_directory }}
           terraform destroy -auto-approve -no-color

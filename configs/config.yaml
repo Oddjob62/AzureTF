@@ -1,6 +1,10 @@
 testrg:
   name: "myResourceGroup123"
 
+secrets_key_vault:
+  name: "transitkeyvault"
+  resource_group_name: "Admin"
+
 networks:
   network1:
     address_space:

@@ -3,8 +3,8 @@ data "azurerm_resource_group" "example" {
 }
 
 data "azurerm_key_vault" "transitkeyvault" {
-  name                = "transitkeyvault"
-  resource_group_name = "Admin"
+  name                = local.config.secrets_key_vault.name
+  resource_group_name = local.config.secrets_key_vault.resource_group_name
 }
 data "azurerm_key_vault_secret" "my_home_ip" {
   name         = "my-home-ip"

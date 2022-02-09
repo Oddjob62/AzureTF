@@ -19,5 +19,5 @@ jobs:
       CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
 
     with:
-      working_directory: Network
+      working_directory: network
       config: config

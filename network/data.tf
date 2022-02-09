@@ -8,7 +8,7 @@ data "azurerm_key_vault" "transitkeyvault" {
 }
 data "azurerm_key_vault_secret" "my_home_ip" {
   name         = "my-home-ip"
-  key_vault_id = azurerm_key_vault.transitkeyvault.id
+  key_vault_id = data.azurerm_key_vault.transitkeyvault.id
 }
 
 

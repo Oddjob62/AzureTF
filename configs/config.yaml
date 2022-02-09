@@ -52,6 +52,6 @@ network_security_groups:
         access: "Allow"
         protocol: "Tcp"
         source_port_range: "*"
-        destination_port_range: "80,443"
+        destination_port_range: "443"
         source_address_prefix: "MY_HOME_IP"
         destination_address_prefix: "*"

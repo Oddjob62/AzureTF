@@ -3,7 +3,6 @@ testrg:
 
 networks:
   network1:
-    location: uksouth
     address_space:
      - "10.0.1.0/16"
     dns_servers:
@@ -11,7 +10,6 @@ networks:
      - "10.0.1.5"
   
   network2:
-    location: uksouth
     address_space:
      - "10.0.2.0/16"
     dns_servers:

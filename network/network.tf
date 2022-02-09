@@ -9,10 +9,10 @@ data "azurerm_resource_group" "example" {
 # }
 
 resource "azurerm_virtual_network" "example" {
-  name                = "${local.config.networks[0]}"
+  name                = "${local.config.networks.network1}"
   location            = "${data.azurerm_resource_group.example.location}"
   resource_group_name = "${data.azurerm_resource_group.example.name}"
-  address_space       = ["10.0.0.0/16"]
+  address_space       = "${local.config.networks.network1.address_space}"
   dns_servers         = ["10.0.0.4", "10.0.0.5"]
 
   subnet {

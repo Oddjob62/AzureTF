@@ -32,14 +32,14 @@ networks:
 
 network_security_groups:
   allow_rdp:
-    security_rule:
-      name: "test123"
+    security_rules:
+      allow_rdp:
       priority: 100
       direction: "Inbound"
       access: "Allow"
       protocol: "Tcp"
       source_port_range: "*"
-      destination_port_range: "*"
+      destination_port_range: "3389"
       source_address_prefix: "*"
       destination_address_prefix: "*"
 

@@ -34,19 +34,19 @@ networks:
         address_prefix: "10.2.2.0/24"
         security_group_id: false
 
-# network_security_groups:
-#   traffic_from_home:
-#     security_rules:
-#       allow_rdp:
-#         priority: 100
-#         direction: "Inbound"
-#         access: "Allow"
-#         protocol: "Tcp"
-#         source_port_range: "*"
-#         destination_port_ranges:
-#          - "3389"
-#         source_address_prefix: "MY_HOME_IP"
-#         destination_address_prefix: "*"
+network_security_groups:
+  traffic_from_home:
+    security_rules:
+      allow_rdp:
+        priority: 100
+        direction: "Inbound"
+        access: "Allow"
+        protocol: "Tcp"
+        source_port_range: "*"
+        destination_port_ranges:
+         - "3389"
+        source_address_prefix: "MY_HOME_IP"
+        destination_address_prefix: "*"
 #       allow_web:
 #         priority: 200
 #         direction: "Inbound"

@@ -17,21 +17,24 @@ resource "azurerm_virtual_network" "example" {
   address_space       = each.value.address_space
   dns_servers         = each.value.dns_servers
 
-  subnet {
-    name           = "subnet1"
-    address_prefix = "10.0.1.0/24"
+  dynamic "subnet" {
+    for_each = each.value.subnets
+    content {
+      name           = subnet.key
+      address_prefix = subnet.value.address_prefix
+    }
   }
 
-  subnet {
-    name           = "subnet2"
-    address_prefix = "10.0.2.0/24"
-  }
+  # subnet {
+  #   name           = "subnet2"
+  #   address_prefix = "10.0.2.0/24"
+  # }
 
-  subnet {
-    name           = "subnet3"
-    address_prefix = "10.0.3.0/24"
-#    security_group = "${azurerm_network_security_group.example.id}"
-  }
+  # subnet {
+  #   name           = "subnet3"
+  #   address_prefix = "10.0.3.0/24"
+  #   security_group = "${azurerm_network_security_group.example.id}"
+  # }
 
   tags = {
     environment = "Production"

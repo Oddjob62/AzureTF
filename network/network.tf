@@ -1,13 +1,3 @@
-data "azurerm_resource_group" "example" {
-  name     = local.config.testrg.name
-}
-
-# resource "azurerm_network_security_group" "example" {
-#   name                = "acceptanceTestSecurityGroup1"
-#   location            = "${data.azurerm_resource_group.example.location}"
-#   resource_group_name = "${data.azurerm_resource_group.example.name}"
-# }
-
 resource "azurerm_virtual_network" "example" {
   for_each = local.config.networks
 

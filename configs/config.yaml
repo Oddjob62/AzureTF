@@ -30,4 +30,6 @@ networks:
         address_prefix: "10.2.2.0/24"
         security_group_id: false
 
-security_groups:
+network_security_groups:
+  allow_rdp:
+  allow_web:

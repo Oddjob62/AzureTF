@@ -64,7 +64,6 @@ jobs:
         run: |
           echo "::notice title=Terraform::working_directory = ${{ inputs.working_directory }}"
           echo "::notice title=Terraform::config = ${{ inputs.config }}"
-          echo "::notice title=Terraform::instance = ${{ inputs.instance }}"
           terraform version
 
       - name: Terraform Init

@@ -20,4 +20,4 @@ jobs:
 
     with:
       working_directory: foundation
-      config: foundation
+      config: config

@@ -42,5 +42,5 @@ network_security_groups:
       destination_port_range: "*"
       source_address_prefix: "*"
       destination_address_prefix: "*"
-  }
+
 #  allow_web:

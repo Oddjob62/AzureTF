@@ -15,10 +15,10 @@ networks:
     subnets:
       subnet1:
         address_prefix: "10.1.1.0/24"
-        security_group_id: false
+        security_group_id: ""
       subnet2:
         address_prefix: "10.1.2.0/24"
-        security_group_id: false
+        security_group_id: ""
   
   network2:
     address_space:

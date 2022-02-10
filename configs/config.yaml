@@ -29,10 +29,10 @@ networks:
     subnets:
       subnet1:
         address_prefix: "10.2.1.0/24"
-        #security_group_id: false
+        security_group_id: ""
       subnet2:
         address_prefix: "10.2.2.0/24"
-        #security_group_id: false
+        security_group_id: ""
 
 network_security_groups:
   traffic_from_home:

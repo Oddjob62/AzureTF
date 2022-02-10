@@ -1,3 +1,60 @@
 testrg:
   name: "myResourceGroup123"
 
+secrets_key_vault:
+  name: "transitkeyvault"
+  resource_group_name: "Admin"
+
+networks:
+  network1:
+    address_space:
+     - "10.1.0.0/16"
+    dns_servers:
+     - "4.2.2.2"
+     - "8.8.8.8"
+    subnets:
+      subnet1:
+        address_prefix: "10.1.1.0/24"
+        security_group_id: false
+      subnet2:
+        address_prefix: "10.1.2.0/24"
+        security_group_id: false
+  
+  network2:
+    address_space:
+     - "10.2.0.0/16"
+    dns_servers:
+     - "4.2.2.2"
+     - "8.8.8.8"
+    subnets:
+      subnet1:
+        address_prefix: "10.2.1.0/24"
+        #security_group_id: false
+      subnet2:
+        address_prefix: "10.2.2.0/24"
+        #security_group_id: false
+
+network_security_groups:
+  traffic_from_home:
+    security_rules:
+      allow_rdp:
+        priority: 100
+        direction: "Inbound"
+        access: "Allow"
+        protocol: "Tcp"
+        source_port_range: "*"
+        destination_port_ranges:
+         - "3389"
+        source_address_prefix: "MY_HOME_IP"
+        destination_address_prefix: "*"
+      allow_web:
+        priority: 200
+        direction: "Inbound"
+        access: "Allow"
+        protocol: "Tcp"
+        source_port_range: "*"
+        destination_port_ranges:
+         - "443"
+         - "80"
+        source_address_prefix: "MY_HOME_IP"
+        destination_address_prefix: "*"

@@ -6,6 +6,8 @@ terraform {
     }
   }
   required_version = ">= 1.1.0"
+  backend "azurerm" {
+  }
 }
 
 provider "azurerm" {
@@ -13,18 +15,8 @@ provider "azurerm" {
 }
 
 locals {
-  config_content = file("../configs/foundation.yaml")
+  config_content = file("../configs/config.yaml")
   config         = yamldecode(local.config_content)
   default_tags   = {}
 }
-
-resource "azurerm_resource_group" "example" {
-  name     = local.config.testrg.name
-  location = "uksouth"
-
-  tags = {
-    timestamp = timestamp()
-  }
-}
-
 

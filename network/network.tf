@@ -12,7 +12,7 @@ resource "azurerm_virtual_network" "example" {
     content {
       name           = subnet.key
       address_prefix = subnet.value.address_prefix
-      security_group = subnet.value.security_group_id ? subnet.value.security_group_id : null
+      security_group = subnet.value.security_group_id != null ? subnet.value.security_group_id : null
     }
   }
 

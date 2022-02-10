@@ -55,5 +55,6 @@ network_security_groups:
         source_port_range: "*"
         destination_port_ranges:
          - "443"
+         - "80"
         source_address_prefix: "MY_HOME_IP"
         destination_address_prefix: "*"

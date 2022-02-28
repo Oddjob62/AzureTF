@@ -1,6 +1,13 @@
 name: GitHub Actions Demo
 on: 
   workflow_dispatch:
+    inputs:
+      Prod:
+        type: choice
+        options:
+        - 'Prod'
+        - 'Non-Prod'
+      
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
